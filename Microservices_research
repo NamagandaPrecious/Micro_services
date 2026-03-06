@@ -1,4 +1,4 @@
-##1.Research on how they use Microservices at Netflix and how it works for them.##
+1.Research on how they use Microservices at Netflix and how it works for them.
 Netflix changed from a monolithic system to microservices after a major database corruption outage in August 2008 that stopped DVD shipments for three days. This showed the risks of a single large system failing completely. (techaheadcorp.com, Dec 2025)
 Netflix's system is composed of thousands of small, independent services. Each service handles a specific business function, one manages user profiles, another handles the recommendation engine, and another focuses on video encoding.
 Decentralized Data:
