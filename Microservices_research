@@ -1,0 +1,45 @@
+1.Research on how they use Microservices at Netflix and how it works for them.
+Netflix changed from a monolithic system to microservices after a major database corruption outage in August 2008 that stopped DVD shipments for three days. This showed the risks of a single large system failing completely. (techaheadcorp.com, Dec 2025)
+Netflix's system is composed of thousands of small, independent services. Each service handles a specific business function — one manages user profiles, another handles the recommendation engine, and another focuses on video encoding.
+Decentralized Data:
+Unlike traditional systems with one giant database, Netflix uses a database-per-service model. This ensures that if the "billing" database has an issue, it doesn't crash the "streaming" service.
+Resilience Through "Chaos":
+Netflix uses a philosophy called Chaos Engineering (popularized by their tool, Chaos Monkey). They intentionally shut down random services in production to ensure the rest of the system can "degrade gracefully." For example, if the "recommendations" service fails, the user might see a generic list of movies instead of a personalized one, but the video will still play.
+API Gateway (Zuul):
+All requests from devices (TVs, phones, laptops) go through a single entry point called Zuul, which routes the request to the correct microservice.
+
+
+HOW IT WORKS FOR THEM
+Microservices work for Netflix by assigning each service a single responsibility (e.g., recommendations, user profiles, billing, video encoding). 
+Each owns its own database, communicates only via stable APIs, runs stateless and containerized, and is independently deployable/scalable. 
+Small autonomous teams follow “you build it, you run it,” using tools like Eureka (discovery), Spinnaker (delivery), and Chaos Engineering for resilience. (f5.com)
+
+2.Find out other 2 companies that use Microservices and how it is working for them.
+Uber
+Uber uses thousands of microservices in a Domain-Oriented Microservice Architecture (DOMA), grouped by business domains (ride matching, payments, maps).
+Dedicated teams develop, deploy, and scale services independently via RPC. This works by enabling parallel development, isolating failures, supporting millions of concurrent rides with per-domain scaling, and boosting developer velocity and reliability. (uber.com)
+
+Spotify
+Spotify runs thousands of microservices aligned with its Squad model. Cross-functional squads (7±2 people) own end-to-end features (search, playlists, streaming) and their services, using APIs and Kafka events.
+This works by giving squads full autonomy for independent deployments/scaling, accelerating innovation, and reliably handling traffic spikes for 600+ million users. (dzone.com)
+
+
+3.Find out other 2 companies that were using Microservices but later turned back to monolith and why they went back to it.
+
+InVision
+Adopted microservices as the team grew to solve organizational issues: long deployment queues, merge conflicts, and blocked releases by aligning services with team boundaries for autonomy.
+Moved back (starting ~2018–2020): managing dozens of repos, languages, databases, monitoring tools, and on-call rotations caused high operational/infrastructure costs and slowed velocity; they merged services into the main monolith. (bennadel.com)
+
+InfluxData (InfluxDB)
+Adopted microservices for the account/resource-management layer: multiple Go services and gateway provided modularity and independent API evolution.
+Moved back (2024–2025): distributed complexity in deployments, operations, and multi-language maintenance hurt productivity (especially for Kubernetes/air-gapped customers); a 5-person team rewrote it as a single Rust monolith (Strangler Fig pattern) in three months. (influxdata.com)
+
+
+References:
+Understanding design of microservices architecture at Netflix (techaheadcorp.com, Dec 2025)
+Adopting Microservices at Netflix (f5.com)
+How Netflix's 2008 Crisis Revolutionised Enterprise Software (dev.to, Sep 2025)
+Introducing Domain-Oriented Microservice Architecture (uber.com, Jul 2020)
+Modeling Microservices at Spotify (dzone.com, Sep 2016)
+Why I've Been Merging Microservices Back Into The Monolith At InVision (bennadel.com, Dec 2020)
+Microservices to Monolith, Rebuilding Our Backend in Rust (influxdata.com, Jun 2025)
